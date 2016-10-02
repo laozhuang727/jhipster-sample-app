@@ -61,5 +61,53 @@
                                timeToLiveSeconds="3600">
                         </cache>
                         
+    <cache name="io.github.jhipster.sample.domain.Task"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="io.github.jhipster.sample.domain.Task.jobs"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="io.github.jhipster.sample.domain.Region"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="io.github.jhipster.sample.domain.Country"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="io.github.jhipster.sample.domain.Location"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="io.github.jhipster.sample.domain.Department"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="io.github.jhipster.sample.domain.Department.employees"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="io.github.jhipster.sample.domain.Employee"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="io.github.jhipster.sample.domain.Employee.jobs"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="io.github.jhipster.sample.domain.Job"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="io.github.jhipster.sample.domain.Job.tasks"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
+    <cache name="io.github.jhipster.sample.domain.JobHistory"
+                               timeToLiveSeconds="3600">
+                        </cache>
+                        
     <!-- jhipster-needle-ehcache-add-entry -->
 </ehcache>
