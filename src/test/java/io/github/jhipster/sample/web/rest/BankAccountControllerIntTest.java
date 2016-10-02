@@ -1,19 +1,16 @@
 package io.github.jhipster.sample.web.rest;
 
 import io.github.jhipster.sample.JhipsterSampleApplicationApp;
-
 import io.github.jhipster.sample.domain.BankAccount;
 import io.github.jhipster.sample.repository.BankAccountRepository;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,17 +24,18 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * Test class for the BankAccountResource REST controller.
+ * Test class for the BankAccountController REST controller.
  *
- * @see BankAccountResource
+ * @see BankAccountController
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = JhipsterSampleApplicationApp.class)
-public class BankAccountResourceIntTest {
+public class BankAccountControllerIntTest {
 
     private static final String DEFAULT_NAME = "AAAAA";
     private static final String UPDATED_NAME = "BBBBB";
@@ -64,9 +62,9 @@ public class BankAccountResourceIntTest {
     @PostConstruct
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        BankAccountResource bankAccountResource = new BankAccountResource();
-        ReflectionTestUtils.setField(bankAccountResource, "bankAccountRepository", bankAccountRepository);
-        this.restBankAccountMockMvc = MockMvcBuilders.standaloneSetup(bankAccountResource)
+        BankAccountController bankAccountController = new BankAccountController();
+        ReflectionTestUtils.setField(bankAccountController, "bankAccountRepository", bankAccountRepository);
+        this.restBankAccountMockMvc = MockMvcBuilders.standaloneSetup(bankAccountController)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }
