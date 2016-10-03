@@ -74,7 +74,8 @@
         </div>
         <div class="form-group">
             <label data-translate="jhipsterSampleApplicationApp.employee.manager" for="field_manager">Manager</label>
-            <select class="form-control" id="field_manager" name="manager" ng-model="vm.employee.manager" ng-options="employee as employee.id for employee in vm.employees track by employee.id">
+            <select class="form-control" id="field_manager" name="manager" ng-model="vm.employee.manager"
+                    ng-options="employee as (employee.firstName + employee.lastName) for employee in vm.employees track by employee.id">
                 <option value=""></option>
             </select>
         </div>
