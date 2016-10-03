@@ -150,7 +150,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/hr/country/country-delete-dialog.html',
+                    templateUrl: 'app/hr/country/count  ry-delete-dialog.html',
                     controller: 'CountryDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
