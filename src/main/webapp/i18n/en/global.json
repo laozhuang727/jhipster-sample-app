@@ -10,6 +10,10 @@
                 "bankAccount": "Bank Account",
                 "label": "Label",
                 "operation": "Operation",
+                "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
+            },
+            "hr": {
+                "main": "HR",
                 "task": "Task",
                 "region": "Region",
                 "country": "Country",
@@ -17,8 +21,7 @@
                 "department": "Department",
                 "employee": "Employee",
                 "job": "Job",
-                "jobHistory": "Job History",
-                "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
+                "jobHistory": "Job History"
             },
             "account": {
                 "main": "Account",
