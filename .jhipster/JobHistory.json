@@ -1,0 +1,48 @@
+{
+  "relationships": [
+    {
+      "relationshipId": 1,
+      "relationshipType": "one-to-one",
+      "relationshipName": "department",
+      "otherEntityName": "department",
+      "otherEntityField": "id",
+      "ownerSide": true,
+      "otherEntityRelationshipName": "jobHistory"
+    },
+    {
+      "relationshipId": 2,
+      "relationshipType": "one-to-one",
+      "relationshipName": "job",
+      "otherEntityName": "job",
+      "otherEntityField": "id",
+      "ownerSide": true,
+      "otherEntityRelationshipName": "jobHistory"
+    },
+    {
+      "relationshipId": 3,
+      "relationshipType": "one-to-one",
+      "relationshipName": "employee",
+      "otherEntityName": "employee",
+      "otherEntityField": "id",
+      "ownerSide": true,
+      "otherEntityRelationshipName": "jobHistory"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": 1,
+      "fieldName": "startDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldId": 2,
+      "fieldName": "endDate",
+      "fieldType": "ZonedDateTime"
+    }
+  ],
+  "changelogDate": "20161003081303",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "entityTableName": "job_history"
+}
