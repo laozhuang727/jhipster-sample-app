@@ -21,7 +21,13 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'queryDirectReports': {
+                method: 'GET',
+                url: 'api/employees/directReports/:id',
+                isArray: true,
+                params: {employeeId: null}
+            }
         });
     }
 })();

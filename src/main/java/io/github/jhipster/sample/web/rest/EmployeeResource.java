@@ -29,7 +29,7 @@ import java.util.Optional;
 public class EmployeeResource {
 
     private final Logger log = LoggerFactory.getLogger(EmployeeResource.class);
-        
+
     @Inject
     private EmployeeService employeeService;
 
@@ -37,7 +37,8 @@ public class EmployeeResource {
      * POST  /employees : Create a new employee.
      *
      * @param employee the employee to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new employee, or with status 400 (Bad Request) if the employee has already an ID
+     * @return the ResponseEntity with status 201 (Created) and with body the new employee, or with status 400 (Bad
+     * Request) if the employee has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @RequestMapping(value = "/employees",
@@ -47,7 +48,8 @@ public class EmployeeResource {
     public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) throws URISyntaxException {
         log.debug("REST request to save Employee : {}", employee);
         if (employee.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("employee", "idexists", "A new employee cannot already have an ID")).body(null);
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("employee", "idexists", "A new " +
+                "employee cannot already have an ID")).body(null);
         }
         Employee result = employeeService.save(employee);
         return ResponseEntity.created(new URI("/api/employees/" + result.getId()))
@@ -132,6 +134,28 @@ public class EmployeeResource {
         log.debug("REST request to delete Employee : {}", id);
         employeeService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("employee", id.toString())).build();
+    }
+
+
+    /**
+     * GET  /employees : get direct reports employee belong to the "id" employee..
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of employees in body
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @RequestMapping(value = "/employees/directReports",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Employee>> getAllDirectReports(@RequestParam(value = "employeeId")
+                                                                           Long employeeId,
+                                                                       Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of directReportsEmployees, employeeId:" + employeeId);
+        Page<Employee> page = employeeService.getAllDirectReports(employeeId,pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/employees/directReports");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
 }
