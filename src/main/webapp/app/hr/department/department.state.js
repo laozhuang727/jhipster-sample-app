@@ -9,53 +9,53 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('job-history', {
+        .state('department', {
             parent: 'entity',
-            url: '/job-history',
+            url: '/department',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'jhipsterSampleApplicationApp.jobHistory.home.title'
+                pageTitle: 'jhipsterSampleApplicationApp.department.home.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/job-history/job-histories.html',
-                    controller: 'JobHistoryController',
+                    templateUrl: 'app/hr/department/departments.html',
+                    controller: 'DepartmentController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('jobHistory');
+                    $translatePartialLoader.addPart('department');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
             }
         })
-        .state('job-history-detail', {
+        .state('department-detail', {
             parent: 'entity',
-            url: '/job-history/{id}',
+            url: '/department/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'jhipsterSampleApplicationApp.jobHistory.detail.title'
+                pageTitle: 'jhipsterSampleApplicationApp.department.detail.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/job-history/job-history-detail.html',
-                    controller: 'JobHistoryDetailController',
+                    templateUrl: 'app/hr/department/department-detail.html',
+                    controller: 'DepartmentDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('jobHistory');
+                    $translatePartialLoader.addPart('department');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'JobHistory', function($stateParams, JobHistory) {
-                    return JobHistory.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'Department', function($stateParams, Department) {
+                    return Department.get({id : $stateParams.id}).$promise;
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
-                        name: $state.current.name || 'job-history',
+                        name: $state.current.name || 'department',
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };
@@ -63,22 +63,22 @@
                 }]
             }
         })
-        .state('job-history-detail.edit', {
-            parent: 'job-history-detail',
+        .state('department-detail.edit', {
+            parent: 'department-detail',
             url: '/detail/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/job-history/job-history-dialog.html',
-                    controller: 'JobHistoryDialogController',
+                    templateUrl: 'app/hr/department/department-dialog.html',
+                    controller: 'DepartmentDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['JobHistory', function(JobHistory) {
-                            return JobHistory.get({id : $stateParams.id}).$promise;
+                        entity: ['Department', function(Department) {
+                            return Department.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -88,79 +88,79 @@
                 });
             }]
         })
-        .state('job-history.new', {
-            parent: 'job-history',
+        .state('department.new', {
+            parent: 'department',
             url: '/new',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/job-history/job-history-dialog.html',
-                    controller: 'JobHistoryDialogController',
+                    templateUrl: 'app/hr/department/department-dialog.html',
+                    controller: 'DepartmentDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
                         entity: function () {
                             return {
-                                startDate: null,
-                                endDate: null,
+                                departmentId: null,
+                                departmentName: null,
                                 id: null
                             };
                         }
                     }
                 }).result.then(function() {
-                    $state.go('job-history', null, { reload: 'job-history' });
+                    $state.go('department', null, { reload: 'department' });
                 }, function() {
-                    $state.go('job-history');
+                    $state.go('department');
                 });
             }]
         })
-        .state('job-history.edit', {
-            parent: 'job-history',
+        .state('department.edit', {
+            parent: 'department',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/job-history/job-history-dialog.html',
-                    controller: 'JobHistoryDialogController',
+                    templateUrl: 'app/hr/department/department-dialog.html',
+                    controller: 'DepartmentDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['JobHistory', function(JobHistory) {
-                            return JobHistory.get({id : $stateParams.id}).$promise;
+                        entity: ['Department', function(Department) {
+                            return Department.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('job-history', null, { reload: 'job-history' });
+                    $state.go('department', null, { reload: 'department' });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('job-history.delete', {
-            parent: 'job-history',
+        .state('department.delete', {
+            parent: 'department',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/job-history/job-history-delete-dialog.html',
-                    controller: 'JobHistoryDeleteController',
+                    templateUrl: 'app/hr/department/department-delete-dialog.html',
+                    controller: 'DepartmentDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['JobHistory', function(JobHistory) {
-                            return JobHistory.get({id : $stateParams.id}).$promise;
+                        entity: ['Department', function(Department) {
+                            return Department.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('job-history', null, { reload: 'job-history' });
+                    $state.go('department', null, { reload: 'department' });
                 }, function() {
                     $state.go('^');
                 });

@@ -9,53 +9,53 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('department', {
+        .state('task', {
             parent: 'entity',
-            url: '/department',
+            url: '/task',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'jhipsterSampleApplicationApp.department.home.title'
+                pageTitle: 'jhipsterSampleApplicationApp.task.home.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/department/departments.html',
-                    controller: 'DepartmentController',
+                    templateUrl: 'app/hr/task/tasks.html',
+                    controller: 'TaskController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('department');
+                    $translatePartialLoader.addPart('task');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
             }
         })
-        .state('department-detail', {
+        .state('task-detail', {
             parent: 'entity',
-            url: '/department/{id}',
+            url: '/task/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'jhipsterSampleApplicationApp.department.detail.title'
+                pageTitle: 'jhipsterSampleApplicationApp.task.detail.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/department/department-detail.html',
-                    controller: 'DepartmentDetailController',
+                    templateUrl: 'app/hr/task/task-detail.html',
+                    controller: 'TaskDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('department');
+                    $translatePartialLoader.addPart('task');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'Department', function($stateParams, Department) {
-                    return Department.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'Task', function($stateParams, Task) {
+                    return Task.get({id : $stateParams.id}).$promise;
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
-                        name: $state.current.name || 'department',
+                        name: $state.current.name || 'task',
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };
@@ -63,22 +63,22 @@
                 }]
             }
         })
-        .state('department-detail.edit', {
-            parent: 'department-detail',
+        .state('task-detail.edit', {
+            parent: 'task-detail',
             url: '/detail/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/department/department-dialog.html',
-                    controller: 'DepartmentDialogController',
+                    templateUrl: 'app/hr/task/task-dialog.html',
+                    controller: 'TaskDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['Department', function(Department) {
-                            return Department.get({id : $stateParams.id}).$promise;
+                        entity: ['Task', function(Task) {
+                            return Task.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -88,79 +88,80 @@
                 });
             }]
         })
-        .state('department.new', {
-            parent: 'department',
+        .state('task.new', {
+            parent: 'task',
             url: '/new',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/department/department-dialog.html',
-                    controller: 'DepartmentDialogController',
+                    templateUrl: 'app/hr/task/task-dialog.html',
+                    controller: 'TaskDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
                         entity: function () {
                             return {
-                                departmentId: null,
-                                departmentName: null,
+                                taskId: null,
+                                title: null,
+                                description: null,
                                 id: null
                             };
                         }
                     }
                 }).result.then(function() {
-                    $state.go('department', null, { reload: 'department' });
+                    $state.go('task', null, { reload: 'task' });
                 }, function() {
-                    $state.go('department');
+                    $state.go('task');
                 });
             }]
         })
-        .state('department.edit', {
-            parent: 'department',
+        .state('task.edit', {
+            parent: 'task',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/department/department-dialog.html',
-                    controller: 'DepartmentDialogController',
+                    templateUrl: 'app/hr/task/task-dialog.html',
+                    controller: 'TaskDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['Department', function(Department) {
-                            return Department.get({id : $stateParams.id}).$promise;
+                        entity: ['Task', function(Task) {
+                            return Task.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('department', null, { reload: 'department' });
+                    $state.go('task', null, { reload: 'task' });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('department.delete', {
-            parent: 'department',
+        .state('task.delete', {
+            parent: 'task',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/department/department-delete-dialog.html',
-                    controller: 'DepartmentDeleteController',
+                    templateUrl: 'app/hr/task/task-delete-dialog.html',
+                    controller: 'TaskDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['Department', function(Department) {
-                            return Department.get({id : $stateParams.id}).$promise;
+                        entity: ['Task', function(Task) {
+                            return Task.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('department', null, { reload: 'department' });
+                    $state.go('task', null, { reload: 'task' });
                 }, function() {
                     $state.go('^');
                 });

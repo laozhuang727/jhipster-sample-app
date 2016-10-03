@@ -9,53 +9,53 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('task', {
+        .state('employee', {
             parent: 'entity',
-            url: '/task',
+            url: '/employee',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'jhipsterSampleApplicationApp.task.home.title'
+                pageTitle: 'jhipsterSampleApplicationApp.employee.home.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/task/tasks.html',
-                    controller: 'TaskController',
+                    templateUrl: 'app/hr/employee/employees.html',
+                    controller: 'EmployeeController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('task');
+                    $translatePartialLoader.addPart('employee');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
             }
         })
-        .state('task-detail', {
+        .state('employee-detail', {
             parent: 'entity',
-            url: '/task/{id}',
+            url: '/employee/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'jhipsterSampleApplicationApp.task.detail.title'
+                pageTitle: 'jhipsterSampleApplicationApp.employee.detail.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/task/task-detail.html',
-                    controller: 'TaskDetailController',
+                    templateUrl: 'app/hr/employee/employee-detail.html',
+                    controller: 'EmployeeDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('task');
+                    $translatePartialLoader.addPart('employee');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'Task', function($stateParams, Task) {
-                    return Task.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'Employee', function($stateParams, Employee) {
+                    return Employee.get({id : $stateParams.id}).$promise;
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
-                        name: $state.current.name || 'task',
+                        name: $state.current.name || 'employee',
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };
@@ -63,22 +63,22 @@
                 }]
             }
         })
-        .state('task-detail.edit', {
-            parent: 'task-detail',
+        .state('employee-detail.edit', {
+            parent: 'employee-detail',
             url: '/detail/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/task/task-dialog.html',
-                    controller: 'TaskDialogController',
+                    templateUrl: 'app/hr/employee/employee-dialog.html',
+                    controller: 'EmployeeDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['Task', function(Task) {
-                            return Task.get({id : $stateParams.id}).$promise;
+                        entity: ['Employee', function(Employee) {
+                            return Employee.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -88,80 +88,85 @@
                 });
             }]
         })
-        .state('task.new', {
-            parent: 'task',
+        .state('employee.new', {
+            parent: 'employee',
             url: '/new',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/task/task-dialog.html',
-                    controller: 'TaskDialogController',
+                    templateUrl: 'app/hr/employee/employee-dialog.html',
+                    controller: 'EmployeeDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
                         entity: function () {
                             return {
-                                taskId: null,
-                                title: null,
-                                description: null,
+                                employeeId: null,
+                                firstName: null,
+                                lastName: null,
+                                email: null,
+                                phoneNumber: null,
+                                hireDate: null,
+                                salary: null,
+                                commissionPct: null,
                                 id: null
                             };
                         }
                     }
                 }).result.then(function() {
-                    $state.go('task', null, { reload: 'task' });
+                    $state.go('employee', null, { reload: 'employee' });
                 }, function() {
-                    $state.go('task');
+                    $state.go('employee');
                 });
             }]
         })
-        .state('task.edit', {
-            parent: 'task',
+        .state('employee.edit', {
+            parent: 'employee',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/task/task-dialog.html',
-                    controller: 'TaskDialogController',
+                    templateUrl: 'app/hr/employee/employee-dialog.html',
+                    controller: 'EmployeeDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['Task', function(Task) {
-                            return Task.get({id : $stateParams.id}).$promise;
+                        entity: ['Employee', function(Employee) {
+                            return Employee.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('task', null, { reload: 'task' });
+                    $state.go('employee', null, { reload: 'employee' });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('task.delete', {
-            parent: 'task',
+        .state('employee.delete', {
+            parent: 'employee',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/task/task-delete-dialog.html',
-                    controller: 'TaskDeleteController',
+                    templateUrl: 'app/hr/employee/employee-delete-dialog.html',
+                    controller: 'EmployeeDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['Task', function(Task) {
-                            return Task.get({id : $stateParams.id}).$promise;
+                        entity: ['Employee', function(Employee) {
+                            return Employee.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('task', null, { reload: 'task' });
+                    $state.go('employee', null, { reload: 'employee' });
                 }, function() {
                     $state.go('^');
                 });

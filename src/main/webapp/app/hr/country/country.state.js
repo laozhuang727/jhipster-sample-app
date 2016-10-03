@@ -18,7 +18,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/country/countries.html',
+                    templateUrl: 'app/hr/country/countries.html',
                     controller: 'CountryController',
                     controllerAs: 'vm'
                 }
@@ -40,7 +40,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/country/country-detail.html',
+                    templateUrl: 'app/hr/country/country-detail.html',
                     controller: 'CountryDetailController',
                     controllerAs: 'vm'
                 }
@@ -71,7 +71,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/country/country-dialog.html',
+                    templateUrl: 'app/hr/country/country-dialog.html',
                     controller: 'CountryDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -96,7 +96,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/country/country-dialog.html',
+                    templateUrl: 'app/hr/country/country-dialog.html',
                     controller: 'CountryDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -125,7 +125,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/country/country-dialog.html',
+                    templateUrl: 'app/hr/country/country-dialog.html',
                     controller: 'CountryDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -150,7 +150,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/country/country-delete-dialog.html',
+                    templateUrl: 'app/hr/country/country-delete-dialog.html',
                     controller: 'CountryDeleteController',
                     controllerAs: 'vm',
                     size: 'md',

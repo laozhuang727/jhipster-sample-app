@@ -9,53 +9,53 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('employee', {
+        .state('region', {
             parent: 'entity',
-            url: '/employee',
+            url: '/region',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'jhipsterSampleApplicationApp.employee.home.title'
+                pageTitle: 'jhipsterSampleApplicationApp.region.home.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/employee/employees.html',
-                    controller: 'EmployeeController',
+                    templateUrl: 'app/hr/region/regions.html',
+                    controller: 'RegionController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('employee');
+                    $translatePartialLoader.addPart('region');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
             }
         })
-        .state('employee-detail', {
+        .state('region-detail', {
             parent: 'entity',
-            url: '/employee/{id}',
+            url: '/region/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'jhipsterSampleApplicationApp.employee.detail.title'
+                pageTitle: 'jhipsterSampleApplicationApp.region.detail.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/employee/employee-detail.html',
-                    controller: 'EmployeeDetailController',
+                    templateUrl: 'app/hr/region/region-detail.html',
+                    controller: 'RegionDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('employee');
+                    $translatePartialLoader.addPart('region');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'Employee', function($stateParams, Employee) {
-                    return Employee.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'Region', function($stateParams, Region) {
+                    return Region.get({id : $stateParams.id}).$promise;
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
-                        name: $state.current.name || 'employee',
+                        name: $state.current.name || 'region',
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };
@@ -63,22 +63,22 @@
                 }]
             }
         })
-        .state('employee-detail.edit', {
-            parent: 'employee-detail',
+        .state('region-detail.edit', {
+            parent: 'region-detail',
             url: '/detail/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/employee/employee-dialog.html',
-                    controller: 'EmployeeDialogController',
+                    templateUrl: 'app/hr/region/region-dialog.html',
+                    controller: 'RegionDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['Employee', function(Employee) {
-                            return Employee.get({id : $stateParams.id}).$promise;
+                        entity: ['Region', function(Region) {
+                            return Region.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -88,85 +88,79 @@
                 });
             }]
         })
-        .state('employee.new', {
-            parent: 'employee',
+        .state('region.new', {
+            parent: 'region',
             url: '/new',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/employee/employee-dialog.html',
-                    controller: 'EmployeeDialogController',
+                    templateUrl: 'app/hr/region/region-dialog.html',
+                    controller: 'RegionDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
                         entity: function () {
                             return {
-                                employeeId: null,
-                                firstName: null,
-                                lastName: null,
-                                email: null,
-                                phoneNumber: null,
-                                hireDate: null,
-                                salary: null,
-                                commissionPct: null,
+                                regionId: null,
+                                regionName: null,
                                 id: null
                             };
                         }
                     }
                 }).result.then(function() {
-                    $state.go('employee', null, { reload: 'employee' });
+                    $state.go('region', null, { reload: 'region' });
                 }, function() {
-                    $state.go('employee');
+                    $state.go('region');
                 });
             }]
         })
-        .state('employee.edit', {
-            parent: 'employee',
+        .state('region.edit', {
+            parent: 'region',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/employee/employee-dialog.html',
-                    controller: 'EmployeeDialogController',
+                    templateUrl: 'app/hr/region/region-dialog.html',
+                    controller: 'RegionDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['Employee', function(Employee) {
-                            return Employee.get({id : $stateParams.id}).$promise;
+                        entity: ['Region', function(Region) {
+                            return Region.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('employee', null, { reload: 'employee' });
+                    $state.go('region', null, { reload: 'region' });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('employee.delete', {
-            parent: 'employee',
+        .state('region.delete', {
+            parent: 'region',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/employee/employee-delete-dialog.html',
-                    controller: 'EmployeeDeleteController',
+                    templateUrl: 'app/hr/region/region-delete-dialog.html',
+                    controller: 'RegionDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['Employee', function(Employee) {
-                            return Employee.get({id : $stateParams.id}).$promise;
+                        entity: ['Region', function(Region) {
+                            return Region.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('employee', null, { reload: 'employee' });
+                    $state.go('region', null, { reload: 'region' });
                 }, function() {
                     $state.go('^');
                 });

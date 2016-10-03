@@ -18,7 +18,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/location/locations.html',
+                    templateUrl: 'app/hr/location/locations.html',
                     controller: 'LocationController',
                     controllerAs: 'vm'
                 }
@@ -40,7 +40,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/location/location-detail.html',
+                    templateUrl: 'app/hr/location/location-detail.html',
                     controller: 'LocationDetailController',
                     controllerAs: 'vm'
                 }
@@ -71,7 +71,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/location/location-dialog.html',
+                    templateUrl: 'app/hr/location/location-dialog.html',
                     controller: 'LocationDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -96,7 +96,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/location/location-dialog.html',
+                    templateUrl: 'app/hr/location/location-dialog.html',
                     controller: 'LocationDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -128,7 +128,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/location/location-dialog.html',
+                    templateUrl: 'app/hr/location/location-dialog.html',
                     controller: 'LocationDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -153,7 +153,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/location/location-delete-dialog.html',
+                    templateUrl: 'app/hr/location/location-delete-dialog.html',
                     controller: 'LocationDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
