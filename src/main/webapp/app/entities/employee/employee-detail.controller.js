@@ -1,13 +1,13 @@
-(function() {
+(function () {
     'use strict';
 
     angular
         .module('jhipsterSampleApplicationApp')
         .controller('EmployeeDetailController', EmployeeDetailController);
 
-    EmployeeDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Employee', 'Department', 'Job', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants'];
+    EmployeeDetailController.$inject = ['$scope', '$state', '$rootScope', '$stateParams', 'previousState', 'entity', 'Employee', 'Department', 'Job', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants'];
 
-    function EmployeeDetailController($scope, $rootScope, $stateParams, previousState, entity, Employee, Department, Job, ParseLinks, AlertService, pagingParams, paginationConstants) {
+    function EmployeeDetailController($scope, $state, $rootScope, $stateParams, previousState, entity, Employee, Department, Job, ParseLinks, AlertService, pagingParams, paginationConstants) {
         var vm = this;
 
         vm.employee = entity;
@@ -22,7 +22,7 @@
 
         findAllDirectReports();
 
-        function findAllDirectReports () {
+        function findAllDirectReports() {
             Employee.queryDirectReports({
                 employeeId: vm.employee.id,
                 page: pagingParams.page - 1,
@@ -36,6 +36,7 @@
                 }
                 return result;
             }
+
             function onSuccess(data, headers) {
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
@@ -43,26 +44,28 @@
                 vm.employees = data;
                 vm.page = pagingParams.page;
             }
+
             function onError(error) {
                 AlertService.error(error.data.message);
             }
         }
 
-        function loadPage (page) {
+        function loadPage(page) {
             vm.page = page;
             vm.transition();
         }
 
-        function transition () {
+        function transition() {
             $state.transitionTo($state.$current, {
                 page: vm.page,
                 sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
                 search: vm.currentSearch
             });
         }
+
         // End And Direct Reports
 
-        var unsubscribe = $rootScope.$on('jhipsterSampleApplicationApp:employeeUpdate', function(event, result) {
+        var unsubscribe = $rootScope.$on('jhipsterSampleApplicationApp:employeeUpdate', function (event, result) {
             vm.employee = result;
         });
         $scope.$on('$destroy', unsubscribe);
