@@ -2,12 +2,10 @@ package io.github.jhipster.sample.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import io.github.jhipster.sample.domain.Country;
-
 import io.github.jhipster.sample.repository.CountryRepository;
 import io.github.jhipster.sample.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +25,7 @@ import java.util.Optional;
 public class CountryResource {
 
     private final Logger log = LoggerFactory.getLogger(CountryResource.class);
-        
+
     @Inject
     private CountryRepository countryRepository;
 
@@ -82,6 +80,7 @@ public class CountryResource {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of countries in body
      */
+    @CrossOrigin(origins = "http://127.0.0.1:8085")
     @RequestMapping(value = "/countries",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)

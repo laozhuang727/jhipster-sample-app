@@ -6,9 +6,6 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ADgQAIo2EeaBH5hXUIbR9Q" value="1"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ADgQAYo2EeaBH5hXUIbR9Q" value="1"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_ZZMF4Io2EeaBH5hXUIbR9Q" name="parentId">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#long"/>
-    </ownedAttribute>
     <ownedAttribute xmi:id="_f_6iQIo2EeaBH5hXUIbR9Q" name="name">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>

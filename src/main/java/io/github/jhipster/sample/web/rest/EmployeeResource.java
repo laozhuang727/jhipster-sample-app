@@ -140,6 +140,7 @@ public class EmployeeResource {
     /**
      * GET  /employees : get direct reports employee belong to the "id" employee..
      *
+     * @param employeeId the id of the employee to get
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of employees in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
